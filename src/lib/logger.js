@@ -2,9 +2,8 @@
 /* eslint-disable no-undef */
 'use strict';
 
-let server = require('./server.js');
-
 module.exports = (req, res, next) => {
-  console.log('Logger request info:', req.method, req.path, new Date().toString());
+  console.log('request info:', req.method, req.path);
+  console.log( 'the time is: ',new Date());
   next();
 };
