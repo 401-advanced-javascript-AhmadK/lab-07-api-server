@@ -1,8 +1,6 @@
-/* eslint-disable no-undef */
-
 'use strict';
 
-const { server, } = require('../lib/server.js');
+const { server } = require('../lib/server.js');
 const supertest = require('supertest');
 const mockRequest = supertest(server);
 
@@ -17,7 +15,7 @@ describe('middleware function module test', () => {
   });
   it('response a 404 for not founding route', () => {
     return mockRequest
-      .get('/helo-there')
+      .get('/hello-there')
       .then(data => {
         expect(data.status).toBe(404);
       }).catch(console.error);
@@ -36,25 +34,24 @@ describe('API Route Module for categories', () => {
       .get('/api/v1/categories')
       .then(results => {
         expect(results.status).toBe(200);
-        // console.log('************************', results.body);
-        expect(typeof results.body.resultsCatg).toBe('object');
+        expect(typeof results.body.resultsCategories).toBe('object');
       });
   });
   it('respond properly to a post request to /api/v1/categories', () => {
     return mockRequest
       .post('/api/v1/categories')
-      .send({ name: 'tast 1', })
+      .send({ name: 'test 1' })
       .then(data => {
         // console.log(data.body)
         expect(data.status).toBe(201);
-        expect(data.body.name).toEqual('tast 1');
+        expect(data.body.name).toEqual('test 1');
         expect(data.body).toBeDefined();
       });
   });
   it('respond properly to a delete request to /api/v1/categories/:id', () => {
     return mockRequest
       .post('/api/v1/categories')
-      .send({ name: 'tast 1', })
+      .send({ name: 'test 1' })
       .then(data => {
         return mockRequest
           .delete(`/api/v1/categories/:${data.body.id}`)
@@ -70,7 +67,7 @@ describe('API Route Module for categories', () => {
   it('respond properly to a put request to /api/v1/categories/:id', () => {
     return mockRequest
       .post('/api/v1/categories')
-      .send({ name: 'tast 1', })
+      .send({ name: 'test 1' })
       .then(data => {
         return mockRequest
           .put(`/api/v1/categories/:${data.body.id}`)
@@ -101,11 +98,11 @@ describe('API Route Module for products', () => {
   it('respond properly to a post request to /api/v1/categories', () => {
     return mockRequest
       .post('/api/v1/categories')
-      .send({ name: 'tast products 1', })
+      .send({ name: 'test products 1' })
       .then(data => {
         // console.log(data.body)
         expect(data.status).toBe(201);
-        expect(data.body.name).toEqual('tast products 1');
+        expect(data.body.name).toEqual('test products 1');
         expect(data.body).toBeDefined();
         expect(typeof data.body.id).toBe('number');
       });
@@ -113,7 +110,7 @@ describe('API Route Module for products', () => {
   it('respond properly to a delete request to /api/v1/products/:id', () => {
     return mockRequest
       .post('/api/v1/products')
-      .send({ name: 'tast products 1', })
+      .send({ name: 'test products 1' })
       .then(data => {
         return mockRequest
           .delete(`/api/v1/products/:${data.body.id}`)
@@ -129,7 +126,7 @@ describe('API Route Module for products', () => {
   it('respond properly to a put request to /api/v1/products/:id', () => {
     return mockRequest
       .post('/api/v1/products')
-      .send({ name: 'tast products 1', })
+      .send({ name: 'test products 1' })
       .then(data => {
         return mockRequest
           .put(`/api/v1/products/:${data.body.id}`)
