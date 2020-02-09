@@ -1,9 +1,15 @@
-/* eslint-disable no-console */
-/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 'use strict';
 
+function timestamp (req,res,next){
+  let requestTime = new Date().toString();
+  req.timeStamp = requestTime;
+  next();
+}
+
 module.exports = (req, res, next) => {
-  console.log('request info:', req.method, req.path);
-  console.log( 'the time is: ',new Date());
+  let requestTime = new Date().toString();
+  req.timeStamp = requestTime;
+  console.log('request info:', req.method, req.path, req.timeStamp);
   next();
 };
